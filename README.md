@@ -41,8 +41,8 @@ Working with other languages and suggesting search term will be followed.
 * meta information
 
 ## Korean patent numbers
-* patent numbers start with 10 and have 9 digits end with B1
-* patent numbers start with year and have 11 digits and end with A
+* patent numbers start with 10 and have 9 digits end with B1 are granted patents (after the examination)
+* patent numbers start with year and have 11 digits and end with A are penting patents (before the examination)
 
 ## Software requiremants of the projects
 
