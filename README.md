@@ -66,7 +66,7 @@ Working with other languages and suggesting search term will be followed.
 * Creating AI model for computing distance between any two patents
 
 ## Caveats
-* Components of patents are not unique.
-* Korean patents in Google patents are not very consistent.
+* Components of Korean patents are not unique.
+* Korean patents in Google patents are not very consistently prepared.
   * some patents do not have classifications
   * some patents have not sectionized text for the disclosure and enbodiments.
