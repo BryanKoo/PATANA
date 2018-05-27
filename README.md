@@ -9,9 +9,14 @@ AI can help human by suggesting search term and screening irrelevant patents fro
 This project is about development of AI NLP algorithm based on up-to-date ML technology for the patent analysis.
 Patents are written with natural written language, not spoken language in technology domain.
 This project starts with developing technology for screening irrelevant patents for Korean patents first.
-Working with other languages and suggesting search term and will be followed.
+Working with other languages and suggesting search term will be followed.
 
 ## Life cycle of patents
+* Preparation of an application
+* Pre-grant prosecution
+  * Filing an application
+  * Search and examination
+* Post-grant prosecution
 
 ## Components of Korean patents
 * drawings - not relevent to the project
