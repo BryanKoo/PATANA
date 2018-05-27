@@ -7,7 +7,7 @@ Though it may be difficult yet for AI to determine whether a patent have novelty
 AI can help human by suggesting search term and screening irrelevant patents from search results.
 
 This project is about development of AI NLP algorithm based on up-to-date ML technology for the patent analysis.
-Patents are written with natural written language, not spoken language in technology domain.
+Patents are written with natural written language, not spoken language, in technology domain.
 This project starts with developing technology for screening irrelevant patents for Korean patents first.
 Working with other languages and suggesting search term will be followed.
 
