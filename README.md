@@ -20,7 +20,7 @@ Working with other languages and suggesting search term will be followed.
 
 ## Components of Korean patents
 * drawings - not relevent to the project
-* textual information
+* texts
   * title
   * abstract
   * description
@@ -38,7 +38,14 @@ Working with other languages and suggesting search term will be followed.
     * mode-for-invention
     * reference-signs-list
   * claims  
-* meta information
+* meta data
+  * classifications
+  * prior art keywords
+  * priority applications
+  * family applications
+  * families citing this family
+  * similar documents
+  * citations
 
 ## Korean patent numbers
 * patent numbers start with 10 and have 9 digits end with B1 are granted patents (after the examination)
@@ -48,8 +55,10 @@ Working with other languages and suggesting search term will be followed.
 
 ## Process breakdown
 * Scraping patents
-* Extracting text section by section and meta data for each patent
-* 
+* Extracting texts section by section and meta data for each patent
+* Spliting texts sentence by sentence
+* Preparing training/verification/test dataset with meda data
+* Creating model for computing distance between any two patents
 
 ## Caveats
 * Components of patents are not unique.
