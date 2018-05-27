@@ -11,12 +11,45 @@ Patents are written with natural written language, not spoken language in techno
 This project starts with developing technology for screening irrelevant patents for Korean patents first.
 Working with other languages and suggesting search term and will be followed.
 
-## Life cycle of patent
+## Life cycle of patents
 
-## Components of Korean patent
+## Components of Korean patents
+* drawings - not relevent to the project
+* textual information
+  * title
+  * abstract
+  * description
+    * technical-field
+    * background-art
+    * tech-problem
+    * tech-solution
+    * advantageous-effects
+    * industial-applicability
+    * description-of-drawings
+    * description-of-embodiments
+    * disclosure
+    * sommury-of-invention
+    * sequence-list-text
+    * mode-for-invention
+    * reference-signs-list
+  * claims  
+* meta information
+
+## Korean patent numbers
+* patent numbers start with 10 and have 9 digits end with B1
+* patent numbers start with year and have 11 digits and end with A
 
 ## Software requiremants of the projects
 
+## Process breakdown
+* Scraping patents
+* Extracting text section by section and meta data for each patent
+* 
 
+## Caveats
+* Components of patents are not unique.
+* Korean patents in Google patents are not very consistent.
+  * some patents do not have classifications
+  * some patents have not sectionized text for the disclosure and enbodiments.
 
 ## External resources
