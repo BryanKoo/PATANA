@@ -53,6 +53,10 @@ Working with other languages and suggesting search term will be followed.
 * patent numbers start with year and have 11 digits and end with U are pending utility model (before the examination)
 
 ## Software requiremants of the projects
+* Distance between any 2 korean patents should be calculated.
+  * Similar patents should be close to each other
+  * A patent and its prior art should be close to each other
+  * Patents with different classifications should not be close to each other
 
 ## Process breakdown
 * Scraping patents
