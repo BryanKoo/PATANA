@@ -3,7 +3,7 @@ The International Patent Classification (IPC) is a hierarchical patent classific
 It is composed of secion, class, subclass, main group, subgroup, for example A01B33/123 has A section, A01 class, A01B subclass, A01B33/00 main group, A01B33/123 subgroup.
 
 The result of the project will be tested with data set from the output of patent search with three specific topics, vitual currency and self-driving and artificial intelligence.
-Sections for these topics B or G or H(not A nor C nor D nor F).
+Sections for these topics B or G or H (not A nor C nor D nor F).
 
 A: Human Necessities
 
