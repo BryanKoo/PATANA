@@ -20,3 +20,7 @@ H: Electricity
 
 The result of the project will be tested with data set from the output of patent search with three specific topics, vitual currency and self-driving and artificial intelligence.
 Sections for these topics B or G or H (not A nor C nor D nor F).
+
+G06: COMPUTING; CALCULATING; COUNTING
+
+H04: ELECTRIC COMMUNICATION TECHNIQUE
