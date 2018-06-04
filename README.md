@@ -19,17 +19,23 @@ Working with other languages and suggesting search term will be followed.
 * Post-grant prosecution
 
 ## Software requiremants of the projects
-* Distance between any 2 korean patents should be calculated.
+* Develop AI-based software that calculated distance between any 2 korean patents
   * Similar patents should be close to each other
   * A patent and its prior art should be close to each other
   * Patents with different classifications should not be close to each other
 
+## How to calculate distance between two patents
+Technology for comparing random documents is not mature yet.
+Patents are relatively well-formed and they have nice matadata that can be used for both verification and learning.
+Experiments are needed to know which part should be compared to calculated distance efficiently and precisely.
+Baseline technology for the calculation is the paragraph vector disclosed by Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
+
 ## Process breakdown
-* Scraping patents
-* Extracting texts section by section and meta data for each patent
-* Spliting texts sentence by sentence
-* Preparing training/verification/test dataset with meta data
-* Creating AI model for computing distance between any two patents
+* Scrape patents
+* Extract texts section by section and extract meta data for each patent
+* Split texts sentence by sentence
+* Prepare training/verification/test dataset with meta data
+* Creat AI model for computing distance between any two patents
 
 ## Caveats
 * Components of Korean patents are not unique.
