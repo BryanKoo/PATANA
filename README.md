@@ -28,7 +28,7 @@ Working with other languages and suggesting search term will be followed.
 Technology for comparing random documents is not mature yet.
 Patents are relatively well-formed and they have nice matadata that can be used for both verification and learning.
 Experiments are needed to know which part should be compared to calculated distance efficiently and precisely.
-Baseline technology for the calculation is the paragraph vector disclosed by Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
+Baseline for the calculation is the paragraph vector disclosed by Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
 
 ## Process breakdown
 * Scrape patents
