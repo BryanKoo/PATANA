@@ -35,7 +35,10 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
 * Extract texts section by section and extract meta data for each patent
 * Split texts sentence by sentence
 * Prepare training/verification/test dataset with meta data
+* Create AI models for computing distance between any two paragraphs
+* Test/Tune AI models and choose the best model for patent comparison
 * Creat AI model for computing distance between any two patents
+* Test/Tune AI model
 
 ## Caveats
 * Components of Korean patents are not unique.
