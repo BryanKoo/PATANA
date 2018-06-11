@@ -40,6 +40,19 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
 * Creat AI model for computing distance between any two patents
 * Test/Tune AI model
 
+## How to use
+1. download python files.
+2. create a sub directory /list, /searched_patents, /searched_patents/html, /searched_patents/text
+3. change korean search keywords in search_korean_patents.py
+4. execute search_korean_patents.py without arguments
+   * patent url list will be created as /list/searched_patents.url
+   * patent html files will be saved in /searched_patents/html
+5. execute extract_text.py with 2 arguments
+   * 2 arguments are the directory name where htmls are saved and the part of patent (abstract, description, claims)
+   * specified part of each patent will be saved in /searched_patents/text
+6. execute concat_text.py with the same 2 arguments
+7. execute sbd_text.py with the same 2 arguments
+
 ## Caveats
 * Components of Korean patents are not unique.
 * Korean patents in Google patents are not very consistently prepared.
