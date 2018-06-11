@@ -6,6 +6,7 @@ import time
 import random
 from fake_useragent import UserAgent
 import os.path
+import sys
 import pdb
 
 # initialize values
@@ -38,9 +39,10 @@ def search_patents(year_begin, year_end, term):
         # 1st ~ 15th day of the month
         query = u"https://patents.google.com/xhr/query?url=q=" + term + \
             "&country=KR&language=KOREAN&before=filing:" + str(year) + str(current_month) + \
-            "16&after="+ str(year) + str(current_month) + "01" + "&num=100&exp=&download=true"
+            "16&after=" + str(year) + str(current_month) + "01" + "&num=100&exp=&download=true"
         query = urllib.quote(query.encode('utf8'), '/:?=&')
         print(query)
+        pdb.set_trace()
 
         session = requests.Session()
         resp = session.get(query, headers= headers)
@@ -118,9 +120,25 @@ def cleanse_list():
       else:
         print("duplicated: " + num)
 
+# default search years are from 2000 to 2016
+# 전자화폐 전자결제 블록체인 비트코인 가상화폐 암호화폐 전자지갑
+# 자율주행 비상제동 차선이탈 순항제어 주차보조 운전보조 크루즈콘트롤 무인자동차
+# 인공지능 신경망 기계학습
 if __name__ == "__main__":
-  search_patents(2000, 2017, u"전자화폐,전자결제,블록체인,비트코인,가상화폐,암호화폐,전자지갑")
-  search_patents(2000, 2017, u"자율주행,비상제동,차선이탈,순항제어,주차보조,운전보조,크루즈콘트롤,무인자동차")
-  search_patents(2000, 2017, u"인공지능,신경망,기계학습")
-  cleanse_list()
-  get_patent_htmls("list/searched_patents.url")
+  if len(sys.argv) < 2:
+    print "run with command(search or download)"
+    sys.exit()
+  if sys.argv[1] == "search":
+    if len(sys.argv) < 3:
+      print "run with 1 or more search keywords seperated by space (use _ when space is needed within keyword)"
+      sys.exit()
+    keywords = ""
+    for i in range(2, len(sys.argv)):
+      keywords += sys.argv[i].decode('utf8') + ","
+    keywords = keywords[:-1].replace("_", " ")
+    search_patents(2000, 2017, keywords)
+  elif sys.argv[1] == "download":
+    cleanse_list()
+    get_patent_htmls("list/searched_patents.url")
+  else:
+    print "run with command(search or scrape)"

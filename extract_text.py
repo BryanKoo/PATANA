@@ -6,30 +6,22 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-def get_texts(file_name):
+# all, abstract, description(including abstract), claims
+def get_texts(file_name, parts="all"):
   first_slash = file_name.find("/")
   num_start = file_name.rfind("/")
   num_stop = file_name.find(".")
   patent_type = file_name[:first_slash]
   patent_num = file_name[num_start+1:num_stop]
+  has_text = False
   
   print file_name
 
   with open(file_name, "r") as a:
     html = a.read()
 
-  text = open(patent_type + "/text/" + patent_num + ".txt", "w")
-
   soup = BeautifulSoup(html, "lxml")
   article = soup.find("article")
-
-  # title
-  title = article.span.text.strip()
-  text.write("!!!title\n" + title + "\n")
-
-  abstract_section = article.find("section", itemprop="abstract")
-  description_section = article.find("section", itemprop="description")
-  claims_section = article.find("section", itemprop="claims")
 
   # classification
   classifications = ""
@@ -39,14 +31,35 @@ def get_texts(file_name):
     for span in classification_spans:
       classifications += span.text + " "
     classifications = classifications.strip()
-    text.write("!!!classifications\n" + classifications + "\n")
-    if classifications == "":
-      print "!!cannot find classifications with h2"
-      pdb.set_trace()
+    if classifications.startswith("A") or classifications.startswith("C") or classifications.startswith("D") or classifications.startswith("F"):
+      print "irrelevant patent"
+      return
+
+  text = open(patent_type + "/text/" + patent_num + ".txt", "w")
+
+  if classifications != "":
+    if parts == "all":
+      has_text = True
+      text.write("!!!classifications\n" + classifications + "\n")
   
+  # title
+  title = article.span.text.strip()
+  if parts == "all":
+    has_text = True
+    text.write("!!!title\n" + title + "\n")
+
+  abstract_section = article.find("section", itemprop="abstract")
+  description_section = article.find("section", itemprop="description")
+  claims_section = article.find("section", itemprop="claims")
+
   # abstract
   abstract = abstract_section.div.abstract.div.text.strip()
-  text.write("!!!abstract\n" + abstract + "\n")
+  if parts == "abstract" or parts == "sentences":
+    has_text = True
+    text.write(abstract + "\n")
+  elif parts == "all":
+    has_text = True
+    text.write("!!!abstract\n" + abstract + "\n")
 
   # prepare text of description_section because there are many formats (worst case: invention-title and p tags)
   description = ""
@@ -60,87 +73,148 @@ def get_texts(file_name):
       if p.text.strip() != "":
         description += p.text.strip() + "\n"
 
-  # technical field
+  # technical field (발명이 이루고자 하는 기술적 과제)(기술분야)
   field = ""
   if description_section.find("technical-field") != None:
     field = description_section.find("technical-field").text.strip()
-    text.write("!!!field\n" + field + "\n")
+    if parts == "description" or parts == "sentences":
+      has_text = True
+      text.write(field + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!field\n" + field + "\n")
 
-  # background art
+  # background art (발명이 속하는 기술 및 그 분야의 종래기술)(배경기술)
   background = ""
   if description_section.find("background-art") != None:
     background = description_section.find("background-art").text.strip() 
-    text.write("!!!background\n" + background + "\n")
+    if parts == "description" or parts == "sentences":
+      has_text = True
+      text.write(background + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!background\n" + background + "\n")
 
   # tech problem
   problem = ""
   if description_section.find("tech-problem") != None:
     problem = description_section.find("tech-problem").text.strip() 
-    text.write("!!!problem\n" + problem + "\n")
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(problem + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!problem\n" + problem + "\n")
 
-  # tech solution
+  # tech solution (발명의 구성 및 작용)
   solution = ""
   if description_section.find("tech-solution") != None:
     solution = description_section.find("tech-solution").text.strip() 
-    text.write("!!!solution\n" + solution + "\n")
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(solution + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!solution\n" + solution + "\n")
 
-  # advantages
+  # advantages (발명의 효과)
   advantages = ""
   if description_section.find("advantageous-effects") != None:
     advantages = description_section.find("advantageous-effects").text.strip()
-    text.write("!!!adbantages\n" + advantages + "\n")
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(advantages + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!advantages\n" + advantages + "\n")
 
-  # applicability
+  # applicability (산업상 이용 가능성)
   applicability = ""
   if description_section.find("industrial-applicability") != None:
     applicability = description_section.find("industrial-applicability").text.strip()
-    text.write("!!!applicability\n" + applicability + "\n")
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(applicability + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!applicability\n" + applicability + "\n")
 
   # description of drawings
   drawings = ""
   if description_section.find("description-of-drawings") != None:
     drawings = description_section.find("description-of-drawings").text.strip()
-    text.write("!!!drawings\n" + drawings + "\n")
+    if parts == "all":
+      has_text = True
+      text.write("!!!drawings\n" + drawings + "\n")
 
-  # embodiments
+  # embodiments (발명의 상세한 설명)
   embodiments = ""
   if description_section.find("description-of-embodiments") != None:
     embodiments = description_section.find("description-of-embodiments").text.strip()
-    text.write("!!!embodiments\n" + embodiments + "\n")
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(embodiments + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!embodiments\n" + embodiments + "\n")
 
-  # disclosure
+  # disclosure (may overlap with tech-solution, advantageous-effects)
   disclosure = ""
-  if description_section.find("disclosure") != None:
+  if solution == "" and description_section.find("disclosure") != None:
     disclosure = description_section.find("disclosure").text.strip()
-    text.write("!!!disclosure\n" + disclosure + "\n")
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(disclosure + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!disclosure\n" + disclosure + "\n")
 
   # summary
   summary = ""
   if description_section.find("summary-of-invention") != None:
     summary = description_section.find("summary-of-invention").text.strip()
-    text.write("!!!summary\n" + summary + "\n")
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(summary + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!summary\n" + summary + "\n")
 
   # sequence
   sequence = ""
   if description_section.find("sequence-list-text") != None:
     sequence = description_section.find("sequence-list-text").text.strip()
-    text.write("!!!sequence\n" + sequence + "\n")
+    if parts == "all":
+      has_text = True
+      text.write("!!!sequence\n" + sequence + "\n")
 
   # modes
   modes = ""
   if description_section.find("mode-for-invention") != None:
     modes = description_section.find("mode-for-invention").text.strip()
-    text.write("!!!modes\n" + modes + "\n")
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(modes + "\n")
+    elif parts == "all":
+      has_text = True
+      text.write("!!!modes\n" + modes + "\n")
 
   # terms
   terms = ""
   if description_section.find("reference-signs-list") != None:
     terms = description_section.find("reference-signs-list").text.strip()
-    text.write("!!!terms\n" + terms + "\n")
+    if parts == "all":
+      has_text = True
+      text.write("!!!terms\n" + terms + "\n")
 
   # no separated description
-  if embodiments == "" and solution == "" and disclosure == "" and summary == "" and sequence == "" and modes == "" and field == "":
-    text.write("!!!description\n" + description)
+  if embodiments == "" and solution == "" and disclosure == "" and summary == "" and modes == "" and field == "":
+    if parts == "sentences" or parts == "description":
+      has_text = True
+      text.write(description)
+    elif parts == "all":
+      has_text = True
+      text.write("!!!description\n" + description)
 
   # claims
   claims = ""
@@ -156,7 +230,12 @@ def get_texts(file_name):
       claim = div.text.strip()
       if claim != u"삭제":
         claims += claim + "\n"
-  text.write("!!!claims\n" + claims)
+  if parts == "sentences" or parts == "claims":
+    has_text = True
+    text.write(claims)
+  elif parts == "all":
+    has_text = True
+    text.write("!!!claims\n" + claims)
 
   text.close()
 
@@ -166,10 +245,23 @@ def get_texts(file_name):
   if claims == "":
     print "cannot find claims"
     pdb.set_trace()
+  if not has_text:
+    print "cannot find text"
+    pdb.set_trace()
 
-
-html_dir = "searched_patents/html/"
-files = os.listdir(html_dir)
-for file in files:
-  if file.endswith("html"):
-    get_texts(html_dir + file)
+if __name__ == "__main__":
+  if len(sys.argv) < 3:
+    print "run with 2 arguments for patent directory(searched_patents, timed_patents) and type of extraction(abstract, description, claims, sentences, all)"
+    sys.exit()
+  html_dir = sys.argv[1] + "/html/"
+  files = os.listdir(html_dir)
+  if len(files) < 1:
+    print "wrong patent directory: " + sys.argv[1]
+    sys.exit()
+  for file in files:
+    if file.endswith("html"):
+      size = os.path.getsize(html_dir + file)
+      if size > 2784238:
+        os.remove(html_dir + file)
+      else:
+        get_texts(html_dir + file, sys.argv[2])
