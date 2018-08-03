@@ -23,7 +23,7 @@ def get_texts(file_name, parts="all"):
   soup = BeautifulSoup(html, "lxml")
   article = soup.find("article")
 
-  # classification
+  # classification filtering
   classifications = ""
   classification_h2 = article.find("h2", text="Classifications")
   if classification_h2 != None:
@@ -35,7 +35,9 @@ def get_texts(file_name, parts="all"):
       print "irrelevant patent"
       return
 
-  text = open(patent_type + "/text/" + patent_num + ".txt", "w")
+  if not os.path.exists(patent_type + "/" + parts):
+    os.makedirs(patent_type + "/" + parts)
+  text = open(patent_type + "/" + parts + "/" + patent_num + ".txt", "w")
 
   if classifications != "":
     if parts == "all":
@@ -261,7 +263,7 @@ if __name__ == "__main__":
   for file in files:
     if file.endswith("html"):
       size = os.path.getsize(html_dir + file)
-      if size > 2784238:
+      if size > 2784238:  # bad patent filtering
         os.remove(html_dir + file)
       else:
         get_texts(html_dir + file, sys.argv[2])
