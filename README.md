@@ -48,11 +48,15 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
 4. execute search_korean_patent.py with download command
    * patent html files will be downloaded in /searched_patents/html
 5. execute extract_text.py with 2 arguments
-   * 2 arguments are the directory name where htmls are saved and the part of patent (abstract, description, claims, sentences)
-   * specified part of each patent will be saved in /searched_patents/part(abstract, description, claims, sentences)
+   * 2 arguments are the directory name where htmls are saved and the part of patent
+     * abstract, description, claims, sentences are examples of the part
+   * specified part of each patent will be saved in /searched_patents/part
    * sentences are all texts that is in the form of sentence. (title, drawings, sequence, terms are not sentences)
 6. execute concat_text.py with the same 2 arguments
+   * part.txt will be created in /searched_patents
 7. execute sbd_text.py with the same 2 arguments
+   * sentence boundary detection result will be saved as /searched_patents/part_sbd.text
+   * stop word filtering result will be saved as /searched_patents/part_sbd_words.text
 
 ## Caveats
 * Components of Korean patents are not unique.
