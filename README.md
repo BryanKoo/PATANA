@@ -42,7 +42,7 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
 
 ## How to use
 1. download python files.
-2. create sub directories /list, /searched_patents, /searched_patents/html, /searched_patents/text
+2. create sub directories /list, /searched_patents, /searched_patents/html
 3. execute search_korean_patents.py with search command and search keywords separated by space
    * patent url list resulted by keyword search will be created as /list/searched_patents.url
 4. execute search_korean_patent.py with download command
@@ -50,6 +50,7 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
 5. execute extract_text.py with 2 arguments
    * 2 arguments are the directory name where htmls are saved and the part of patent (abstract, description, claims, sentences)
    * specified part of each patent will be saved in /searched_patents/part(abstract, description, claims, sentences)
+   * sentences are all texts that is in the form of sentence. (title, drawings, sequence, terms are not sentences)
 6. execute concat_text.py with the same 2 arguments
 7. execute sbd_text.py with the same 2 arguments
 
