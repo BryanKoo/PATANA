@@ -46,17 +46,22 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
 3. execute search_korean_patents.py with search command and search keywords separated by space
    * patent url list resulted by keyword search will be created as /list/searched_patents.url
 4. execute search_korean_patent.py with download command
-   * patent html files will be downloaded in /searched_patents/html
+   * patent html files will be downloaded in /searched_patents/html/
 5. execute extract_text.py with 2 arguments
    * 2 arguments are the directory name where htmls are saved and the part of patent
      * abstract, description, claims, sentences are examples of the part
-   * specified part of each patent will be saved in /searched_patents/part
+   * specified part of each patent will be saved in /searched_patents/part/
    * sentences are all texts that is in the form of sentence. (title, drawings, sequence, terms are not sentences)
 6. execute concat_text.py with the same 2 arguments
-   * part.txt will be created in /searched_patents
+   *  concatanation result will be saved as /searched_patents/part.txt
 7. execute sbd_text.py with the same 2 arguments
    * sentence boundary detection result will be saved as /searched_patents/part_sbd.text
    * stop word filtering result will be saved as /searched_patents/part_sbd_words.text
+   * each patent in /searched_patents/part/ will be processed both sentence boundary detection and stop word filtering
+8. apply fasttext and create sentence vectors for each patent
+9. calculate distance of any two patent as
+   * cosine similarity between averages of sentence vectors of two patents
+   * euclidian distence between averages of sentence vectors of two patents
 
 ## Caveats
 * Components of Korean patents are not unique.
