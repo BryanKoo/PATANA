@@ -59,7 +59,7 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
      * SBD can be done by punctuation identification since patents have formality.
    * stop word filtering result will be saved as /searched_patents/part_sbd_words.text
      * stop words may not be static words and they are dependent on the language.
-     * Morphological analyzer can be applied to identify stop words of each sentence for Korean patents.
+     * Morphological analyzer can be applied to identify postpositional subword for Korean patents.
    * each patent in /searched_patents/part/ will be processed both sentence boundary detection and stop word filtering
 8. apply fasttext and create sentence vectors for each patent
 9. calculate distance of any two patent as
