@@ -61,10 +61,19 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
      * stop words may not be static words and they are dependent on the language.
      * Morphological analyzer can be applied to identify postpositional subword for Korean patents.
    * each patent in /searched_patents/part/ will be processed both sentence boundary detection and stop word filtering
-8. apply fasttext and create sentence vectors for each patent
-9. calculate distance of any two patent as
-   * cosine similarity between averages of sentence vectors of two patents
-   * euclidian distence between averages of sentence vectors of two patents
+8. apply fasttext for word2vec model
+   * if running command-line,
+   * fasttext skipgram -input ../searched_patents/sentences_sbd_words.txt  -output sentences
+9. create sentence vectors for each patent
+   * if running command-line,
+   * fasttext print-sentence-vectors sentences.bin < patent_sbd_words.txt > patent_sbd_words.vec
+10. execute find_nearest.py with 3 arguments
+   * 1st argument is the patent number to find nearest patents
+   * 2nd argument is the subdirecory name (searched_patents)
+   * 3rd argument is the part name (abstract, description, claims, sentences)
+   * then it will calculate distance between the given patent and all other patents in the subdirectory by
+     * cosine similarity between averages of sentence vectors of two patents
+     * euclidian distence between averages of sentence vectors of two patents
 
 ## Caveats
 * Components of Korean patents are not unique.
