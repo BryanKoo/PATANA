@@ -55,8 +55,11 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
 6. execute concat_text.py with the same 2 arguments
    *  concatanation result will be saved as /searched_patents/part.txt
 7. execute sbd_text.py with the same 2 arguments
-   * sentence boundary detection result will be saved as /searched_patents/part_sbd.text
+   * SBD(sentence boundary detection) result will be saved as /searched_patents/part_sbd.text
+     * SBD can be done by punctuation identification since patents have formality.
    * stop word filtering result will be saved as /searched_patents/part_sbd_words.text
+     * stop words may not be static words and they are dependent on the language.
+     * Morphological analyzer can be applied to identify stop words of each sentence for Korean patents.
    * each patent in /searched_patents/part/ will be processed both sentence boundary detection and stop word filtering
 8. apply fasttext and create sentence vectors for each patent
 9. calculate distance of any two patent as
