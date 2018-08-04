@@ -26,7 +26,7 @@ Working with other languages and suggesting search term will be followed.
 
 ## How to calculate distance between two patents
 Technology for comparing random documents is not mature yet.
-Patents are relatively well-formed and they have nice meta data that can be used for both verification and learning.
+Patents are relatively well-formed and they have nice meta data that can be used for both training and testing.
 Experiments are needed to know which part should be compared to calculated distance efficiently and precisely.
 Baseline for the calculation is the paragraph vector disclosed by Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
 
@@ -34,7 +34,7 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
 * Scrape patents
 * Extract texts section by section and extract meta data for each patent
 * Split texts sentence by sentence
-* Prepare training/verification/test dataset with meta data
+* Prepare training/validation/test dataset with meta data
 * Create AI models for computing distance between any two paragraphs
 * Test/Tune AI models and choose the best model for patent comparison
 * Creat AI model for computing distance between any two patents
