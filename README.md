@@ -68,12 +68,12 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
    * if running command-line,
    * fasttext print-sentence-vectors sentences.bin < patent_sbd_words.txt > patent_sbd_words.vec
 10. execute find_nearest.py with 3 arguments
-   * 1st argument is the patent number to find nearest patents
-   * 2nd argument is the subdirecory name (searched_patents)
-   * 3rd argument is the part name (abstract, description, claims, sentences)
-   * then it will calculate distance between the given patent and all other patents in the subdirectory by
-     * cosine similarity between averages of sentence vectors of two patents
-     * euclidian distence between averages of sentence vectors of two patents
+    * 1st argument is the patent number to find nearest patents
+    * 2nd argument is the subdirecory name (searched_patents)
+    * 3rd argument is the part name (abstract, description, claims, sentences)
+    * then it will calculate distance between the given patent and all other patents in the subdirectory by
+      * cosine similarity between averages of sentence vectors of two patents
+      * euclidian distence between averages of sentence vectors of two patents
 
 ## Caveats
 * Components of Korean patents are not unique.
