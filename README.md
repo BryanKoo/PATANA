@@ -47,14 +47,16 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
    * patent url list resulted by keyword search will be created as /list/searched_patents.url
 4. execute search_korean_patent.py with download command
    * patent html files will be downloaded in /searched_patents/html/
-5. execute extract_text.py with 2 arguments
-   * 2 arguments are the directory name where htmls are saved and the part of patent
+5. execute extract_text.py to extract part of from html
+   * with 2 arguments, the directory name where htmls are saved and the part of patent
      * abstract, description, claims, sentences are examples of the part
    * specified part of each patent will be saved in /searched_patents/part/
    * sentences are all texts that is in the form of sentence. (title, drawings, sequence, terms are not sentences)
-6. execute concat_text.py with the same 2 arguments
-   *  concatanation result will be saved as /searched_patents/part.txt
-7. execute sbd_text.py with the same 2 arguments
+6. execute concat_text.py to create a big concatanated file
+   * with the same 2 arguments
+   * concatanation result will be saved as /searched_patents/part.txt
+7. execute sbd_text.py for pre-processing
+   * with the same 2 arguments
    * SBD(sentence boundary detection) result will be saved as /searched_patents/part_sbd.text
      * SBD can be done by punctuation identification since patents have formality.
    * stop word filtering result will be saved as /searched_patents/part_sbd_words.text
@@ -62,11 +64,10 @@ Baseline for the calculation is the paragraph vector disclosed by Mikolov. https
      * Morphological analyzer can be applied to identify postpositional subword for Korean patents.
    * each patent in /searched_patents/part/ will be processed both sentence boundary detection and stop word filtering
 8. apply fasttext for word2vec model
-   * if running command-line,
-   * fasttext skipgram -input ../searched_patents/sentences_sbd_words.txt  -output sentences
-9. create sentence vectors for each patent
-   * if running command-line,
-   * fasttext print-sentence-vectors sentences.bin < patent_sbd_words.txt > patent_sbd_words.vec
+   * if run by command-line, fasttext skipgram -input ../searched_patents/sentences_sbd_words.txt  -output sentences
+9. execute embed_sentence.py to create sentence vectors for each patent
+   * with the same 2 arguments
+   * if run by command-line, fasttext print-sentence-vectors sentences.bin < patent_sbd_words.txt > patent_sbd_words.vec
 10. execute find_nearest.py with 3 arguments
     * 1st argument is the patent number to find nearest patents
     * 2nd argument is the subdirecory name (searched_patents)
