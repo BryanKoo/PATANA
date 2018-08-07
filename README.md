@@ -1,15 +1,9 @@
 # PATANA
 PATent ANAlysis project 
 
+Patent or patent text is a an official document conferring the exclusive right granted by a government to an inventor to manufacture, use, or sell an invention for a certain number of years.
 Prior arts for a patent are searched many times during the life cycle of a patent.
 It is because novelty is one of the most important factor for determining patentability.
-Though it may be difficult yet for AI to determine whether a patent have novelty or not.
-AI can help human by suggesting search term and/or screening irrelevant patents from search results.
-
-This project is about development of AI NLP algorithm based on up-to-date ML technology for the patent analysis.
-Patents are written with natural written language, not spoken language, in technology domain.
-This project starts with developing technology for screening irrelevant patents for Korean patents first.
-Working with other languages and suggesting search term will be followed.
 
 ## Life cycle of patents
 * Preparation of an application
@@ -18,15 +12,33 @@ Working with other languages and suggesting search term will be followed.
   * Search and examination
 * Post-grant prosecution
 
-## Software requiremants of the projects
+PATANA project is about development of AI NLP algorithm based on up-to-date ML technology for patents.
+Patents are written with natural written language, not spoken language, in technology domain.
+Though it may be difficult yet for AI to determine whether a patent have novelty or not.
+AI can help human by suggesting search term and/or screening irrelevant patents from search results.
+
+This project starts with the problem solving of screening irrelevant patents for Korean patents first.
+It can be called as patana1ko sub-project of PATANA.
+Working with other languages and suggesting search term will be followed.
+
+## Problem description
+Search by keyword has been the way of finding prior arts.
+Elastic search, Apache solar, lucene are examples of search engine that can be used for searching by keyword.
+The search engines have their own relevence ranking based on a word occurence counting called tf-idf.
+This relevence ranking is not very satisfactory for checking whether a patent has similar idea to another one.
+Sreening irrelevant patents is done by human after reading considerable portion of each patent from search result.
+If an AI technology can screen irrelevant patents from search results, it will reduce cost for patent drafting, refining, examining.
+
+## Software requiremants of the patana1ko
 * Develop AI-based software that calculated distance between any 2 korean patents
   * Similar patents should be close to each other
   * A patent and its prior art should be close to each other
+  * Patents with different topic should not be close to each other
   * Patents with different classifications should not be close to each other
 
 ## How to calculate distance between two patents
 Technology for comparing generic documents is not mature yet.
-Patents are relatively well-formed and they have nice meta data that can be used for both training and testing.
+Patents are relatively well-formed and they have nice meta data that can be used for validation of algorithm.
 Experiments are needed to know which part should be compared to calculated distance efficiently and precisely.
 
 Baseline for the calculation is the paragraph vector disclosed by Le & Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
