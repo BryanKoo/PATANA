@@ -29,7 +29,12 @@ def sbd_text(filename, fulltext=True):
     # 괄호열기 후에 괄호닫기가 없고 문장부호 없다면 다음줄 붙이기
     while line.count("(") > line.count(")"):
       if line.endswith(".") or line.endswith("?") or line.endswith("!"): break
-      line += " " + fin.readline().decode("utf-8").strip()
+      next_line = fin.readline().decode("utf-8").strip()
+      if not next_line: break
+      next_line = next_line.strip()
+      if next_line == "": break
+      if not has_hangul(next_line): break
+      line += " " + next_line
 
     lines = sentence_segmenter(line, "ko")
     for line in lines:
@@ -78,5 +83,6 @@ if __name__ == "__main__":
     print "wrong patent directory: " + text_dir
     sys.exit()
   for file in files:
-    if file.endswith("txt"):
+    if file.endswith("txt") and not file.endswith("words.txt"):
+      print file
       sbd_text(text_dir + file, False)
