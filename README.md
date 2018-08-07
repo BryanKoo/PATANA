@@ -25,10 +25,12 @@ Working with other languages and suggesting search term will be followed.
   * Patents with different classifications should not be close to each other
 
 ## How to calculate distance between two patents
-Technology for comparing random documents is not mature yet.
+Technology for comparing generic documents is not mature yet.
 Patents are relatively well-formed and they have nice meta data that can be used for both training and testing.
 Experiments are needed to know which part should be compared to calculated distance efficiently and precisely.
 Baseline for the calculation is the paragraph vector disclosed by Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
+Another way of distance calculation is word mover's distance disclosed by Kusner et. al.
+http://proceedings.mlr.press/v37/kusnerb15.pdf
 
 ## Process breakdown
 * Scrape patents
