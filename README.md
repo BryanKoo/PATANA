@@ -31,7 +31,7 @@ Experiments are needed to know which part should be compared to calculated dista
 
 Baseline for the calculation is the paragraph vector disclosed by Le & Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
 
-Another way of distance calculation is word mover's distance disclosed by Kusner et. al.
+Another way of the distance calculation is the word mover's distance disclosed by Kusner et. al.
 http://proceedings.mlr.press/v37/kusnerb15.pdf
 
 ## Process breakdown
