@@ -23,7 +23,7 @@ Working with other languages and suggesting search term will be followed.
 
 ## Problem description
 Search by keyword has been the way of finding prior arts.
-Elastic search, Apache solar, lucene are examples of search engine that can be used for searching by keyword.
+Elasticsearch, Solar, Lucene are examples of search engine that can be used for searching by keyword.
 The search engines have their own relevence ranking based on a word occurence counting called tf-idf.
 This relevence ranking is not very satisfactory for checking whether a patent has similar idea to another one.
 Sreening irrelevant patents is done by human after reading considerable portion of each patent from search result.
