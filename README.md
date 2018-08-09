@@ -37,11 +37,14 @@ AI will reduce cost for patent drafting, refining, examining by screening irrele
   * Patents with different topic should not be close to each other
   * Patents with different classifications should not be close to each other
 
-## How to find novelty infringement between patents
+## How to find novelty infringement among huge number of patents
 There are some recent technologies for calculating similarity of documents.
+
 Baseline for the calculation is the paragraph vector disclosed by Le & Mikolov in 2014. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
+
 Another way of the distance calculation is the word mover's distance disclosed by Kusner et. al in 2015.
 http://proceedings.mlr.press/v37/kusnerb15.pdf
+
 These technologies are not utilized in real world because they are not very accurate nor efficient for generic documents.
 Patents are relatively well-formed and they have nice meta data that can be utilized for accuracy and efficiency.
 An exquisite solution utilizing characteristics of patent document can make these technologies work for prior art search.
