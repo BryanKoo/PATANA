@@ -39,7 +39,7 @@ If an AI technology can screen irrelevant patents from search results, it will r
 ## How to calculate distance between two patents
 Technology for comparing generic documents is not mature yet.
 Patents are relatively well-formed and they have nice meta data that can be used for validation of algorithm.
-Experiments are needed to know which part should be compared to calculated distance efficiently and precisely.
+Experiments, documented separately, are needed to know which part should be compared to calculated distance efficiently and precisely.
 
 Baseline for the calculation is the paragraph vector disclosed by Le & Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
 
