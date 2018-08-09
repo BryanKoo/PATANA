@@ -3,7 +3,7 @@
 ## Characteristics of patents
 Claims are explained in description part in detail.
 
-## Hypothesis proposition
+## Hypothesis
 * We can find candidates for novelty inpringement by comparing abstract part of patent.
   * Finding candadates can be seen as text classification.
   * Efficiency is improved because abstract part is only small portion of patent.
@@ -16,6 +16,6 @@ Claims are explained in description part in detail.
 * The distance calucation of ech claim can be more accurate when explanation in description part is concaternated.
   * It is the same reason why we caoncatenate depending claim to dependent claim before the distance calculation.
 
-## Experiment and observation
+## Experiment for verificaion
 
 ## The final architecture
