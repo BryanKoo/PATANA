@@ -1,7 +1,11 @@
 # Solution - how to find novelty infringement accurately and efficiently
 
 ## Characteristics of patents
-Claims are explained in description part in detail.
+Patent is a well-formed document where invention is explained in several sections such as abstract, description, drawings, claims.
+Usually an invention is combination of several unique ideas that are independent or dependent with each other.
+Each unique idea of invention is expressed as a claim in the patent.
+Technical field, background art, explanation of claims, industrial applicability, .. are sub-sections of description.
+Abstract is a concise summary of the disclosure of the invention contained in the description, claims and drawings.
 
 ## Hypothesis
 * We can find candidates for novelty inpringement by comparing abstract part of patent.
