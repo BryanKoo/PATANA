@@ -6,6 +6,13 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+def find_dependency(claim):
+  dependency_word_pos = claim.find("항에 있어서")
+  if dependency_word_pos < 0:
+    return -1
+  else:
+    return dependency_word_pos + 7
+
 # all, abstract, description(including abstract), claims
 def get_texts(file_name, parts="all"):
   first_slash = file_name.find("/")
@@ -218,20 +225,43 @@ def get_texts(file_name, parts="all"):
       has_text = True
       text.write("!!!description\n" + description)
 
-  # claims
+  # claims section need special operation for dependency reason
   claims = ""
-  lis = claims_section.findAll("li")
+  lis = claims_section.findAll("li")  # 1 claim per li
+  last_independent_claim = ""
   if len(lis) > 0:
     for li in lis:
-      claim = li.text.strip()
-      if claim != u"삭제":
-        claims += claim + "\n"
+      ctext_divs = li.findAll("div", {"class":"claim-text"})
+      claim = ""
+      for ctext_div in ctext_divs:
+        claim_text = ctext_div.text.strip()
+        if claim_text != u"삭제":
+          claim += claim_text + " "
+      if claim != "":
+        dependency_pos = find_dependency(claim)
+        if dependency_pos < 0:
+          last_independent_claim = claim.strip()
+          claims += last_independent_claim + "\n"
+        else:
+          claims += last_independent_claim + " " + claim[dependency_pos:].strip() + "\n"
   else:
-    divs = claims_section.findAll("div", {"class":"claim-text"})
+    divs = claims_section.findAll("div", {"class":"claim"})
     for div in divs:
-      claim = div.text.strip()
-      if claim != u"삭제":
-        claims += claim + "\n"
+      if div.has_attr('num'): # 1 claim per claim div
+        ctext_divs = div.findAll("div", {"class":"claim-text"})
+        claim = ""
+        for ctext_div in ctext_divs:
+          claim_text = ctext_div.text.strip()
+          if claim_text != u"삭제":
+            claim += claim_text + " "
+        if claim != "":
+          dependency_pos = find_dependency(claim)
+          if dependency_pos < 0:
+            last_independent_claim = claim.strip()
+            claims += last_independent_claim + "\n"
+          else:
+            claims += last_independent_claim + " " + claim[dependency_pos:].strip() + "\n"
+
   if parts == "sentences" or parts == "claims":
     has_text = True
     text.write(claims)
