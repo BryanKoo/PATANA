@@ -1,36 +1,54 @@
 # PATANA
 PATent ANAlysis project 
 
+Patent or patent text is a an official document conferring the exclusive right granted by a government to an inventor to manufacture, use, or sell an invention for a certain number of years.
 Prior arts for a patent are searched many times during the life cycle of a patent.
 It is because novelty is one of the most important factor for determining patentability.
-Though it may be difficult yet for AI to determine whether a patent have novelty or not.
-AI can help human by suggesting search term and/or screening irrelevant patents from search results.
 
-This project is about development of AI NLP algorithm based on up-to-date ML technology for the patent analysis.
-Patents are written with natural written language, not spoken language, in technology domain.
-This project starts with developing technology for screening irrelevant patents for Korean patents first.
+## Prior arts search during life cycle of patents
+* Preparation of an application - inventor searches prior arts to determine whether to prepare a patent of not.
+* Pre-grant prosecution
+  * Filing an application - practitioner searches prior arts to clarify the novelty of the invention.
+  * Search and examination - examiner searches prior arts to grant or reject the application
+  * Appealing to rejection - practitioner searches prior arts to appeal to the rejection
+* Post-grant prosecution - a third party searches prior arts to oppose the grant of a patent
+
+There are systems for this prior art search.
+They are all based on search engine and database technology.
+PATANA project is an NLP application based on up-to-date AI technology for the prior art search.
+AI can help human by suggesting search term and/or screening irrelevant patents from the search results.
+
+This project starts with the problem solving of screening irrelevant patents for Korean patents first.
+It may be called as patana1ko sub-project of PATANA.
 Working with other languages and suggesting search term will be followed.
 
-## Life cycle of patents
-* Preparation of an application
-* Pre-grant prosecution
-  * Filing an application
-  * Search and examination
-* Post-grant prosecution
+## Problem description
+Search by keyword has been the way of finding prior arts.
+Elasticsearch, Solar, Lucene are examples of search engine that can be used for searching by keyword.
+The search engines have their own relevence ranking based on a word occurence counting called tf-idf.
+This relevence ranking is not very satisfactory for checking whether a patent has similar claims to another one.
+Sreening irrelevant patents is done by human after reading considerable portion of patents in search result.
+AI will reduce cost for patent drafting, refining, examining by screening irrelevant patents from search results.
 
-## Software requiremants of the projects
+## Software requiremants of the patana1ko
 * Develop AI-based software that calculated distance between any 2 korean patents
   * Similar patents should be close to each other
   * A patent and its prior art should be close to each other
+  * Patents with different topic should not be close to each other
   * Patents with different classifications should not be close to each other
 
-## How to calculate distance between two patents
-Technology for comparing generic documents is not mature yet.
-Patents are relatively well-formed and they have nice meta data that can be used for both training and testing.
-Experiments are needed to know which part should be compared to calculated distance efficiently and precisely.
-Baseline for the calculation is the paragraph vector disclosed by Le & Mikolov. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
-Another way of distance calculation is word mover's distance disclosed by Kusner et. al.
+## How to find novelty infringement among huge number of patents
+There are some recent technologies for calculating similarity of documents.
+
+Baseline for the calculation is the paragraph vector disclosed by Le & Mikolov in 2014. https://cs.stanford.edu/~quocle/paragraph_vector.pdf
+
+Another way of the distance calculation is the word mover's distance disclosed by Kusner et. al in 2015.
 http://proceedings.mlr.press/v37/kusnerb15.pdf
+
+These technologies are not utilized in real world because they are not very accurate nor efficient for generic documents.
+Patents are relatively well-formed and they have nice meta data that can be utilized for accuracy and efficiency.
+An exquisite solution utilizing characteristics of patent document can make these technologies work for prior art search.
+The solution will be explained in separate document.
 
 ## Process breakdown
 * Scrape patents
