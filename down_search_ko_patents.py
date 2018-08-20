@@ -6,7 +6,7 @@ import time
 import random
 from fake_useragent import UserAgent
 import os.path
-import sys
+import sys, shutil
 import pdb
 
 # initialize values
@@ -69,9 +69,9 @@ def search_patents(year_begin, year_end, term):
 
 
 # read the list, request and save each patent
-def get_patent_htmls(file_name):
+def down_patent_htmls(subdir, filename):
 
-  with open(file_name, "r") as a:
+  with open(filename, "r") as a:
     lines = a.readlines()
 
   session = requests.Session()
@@ -80,9 +80,12 @@ def get_patent_htmls(file_name):
     url = lines[i].strip()
     tokens = url.split("/")
     pnum = tokens[4]
-    pfname = "searched_patents/html/" + pnum + ".html"
-    if os.path.exists(pfname):
-      print "file exists " + pfname
+    pfile = "searched_patents/html/" + subdir + "/" + pnum + ".html"
+    tpfile = "timed_patents/html/" + pnum + ".html"
+
+    if os.path.exists(tpfile):
+      print "file exists " + tpfile
+      shutil.copyfile(tpfile, pfile)
       continue
 
     try:
@@ -92,7 +95,7 @@ def get_patent_htmls(file_name):
       print "cannot get the html " + url
       continue
 
-    kr = open(pfname, "w")
+    kr = open(pfile, "w")
     kr.write(r.content)
     kr.close()
     time.sleep(random.randint(3,6))
@@ -126,9 +129,9 @@ def cleanse_list():
 # 인공지능 신경망 기계학습
 if __name__ == "__main__":
   if len(sys.argv) < 2:
-    print "run with command(search or download)"
+    print "run with command(search or cleanse or download)"
     sys.exit()
-  if sys.argv[1] == "search":
+  elif sys.argv[1] == "search":
     if len(sys.argv) < 3:
       print "run with 1 or more search keywords seperated by space (use _ when space is needed within keyword)"
       sys.exit()
@@ -137,8 +140,15 @@ if __name__ == "__main__":
       keywords += sys.argv[i].decode('utf8') + ","
     keywords = keywords[:-1].replace("_", " ")
     search_patents(2000, 2017, keywords)
-  elif sys.argv[1] == "download":
+  elif sys.argv[1] == "cleanse":
     cleanse_list()
-    get_patent_htmls("list/searched_patents.url")
+  elif sys.argv[1] == "download":
+    if len(sys.argv) < 4:
+      print "run with url-list file and subdir"
+      sys.exit()
+    if os.path.exists(sys.argv[2]) and os.path.exists("searched_patents/html/" + sys.argv[3]):
+      down_patent_htmls(sys.argv[3], sys.argv[2])
+    else:
+      print "cannot find url-list file and/or subdir"
   else:
-    print "run with command(search or scrape)"
+    print "run with command(search or cleanse or download)"
