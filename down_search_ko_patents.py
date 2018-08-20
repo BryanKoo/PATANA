@@ -124,12 +124,12 @@ def cleanse_list():
         print("duplicated: " + num)
 
 # default search years are from 2000 to 2016
-# 전자화폐 전자결제 블록체인 비트코인 가상화폐 암호화폐 전자지갑
-# 자율주행 비상제동 차선이탈 순항제어 주차보조 운전보조 크루즈콘트롤 무인자동차
-# 인공지능 신경망 기계학습
+# bitcoin 전자화폐 전자결제 블록체인 비트코인 가상화폐 암호화폐 전자지갑
+# behicle 자율주행 비상제동 차선이탈 순항제어 주차보조 운전보조 크루즈콘트롤 무인자동차
+# ai 인공지능 신경망 기계학습
 if __name__ == "__main__":
   if len(sys.argv) < 2:
-    print "run with command(search or cleanse or download)"
+    print "run with command(search or download)"
     sys.exit()
   elif sys.argv[1] == "search":
     if len(sys.argv) < 3:
@@ -140,8 +140,9 @@ if __name__ == "__main__":
       keywords += sys.argv[i].decode('utf8') + ","
     keywords = keywords[:-1].replace("_", " ")
     search_patents(2000, 2017, keywords)
-  elif sys.argv[1] == "cleanse":
     cleanse_list()
+    print "list/searched_patents.csv, list/searched_patents.url created"
+    print "rename files for the separation from other searches"
   elif sys.argv[1] == "download":
     if len(sys.argv) < 4:
       print "run with url-list file and subdir"
@@ -151,4 +152,4 @@ if __name__ == "__main__":
     else:
       print "cannot find url-list file and/or subdir"
   else:
-    print "run with command(search or cleanse or download)"
+    print "run with command(search or download)"

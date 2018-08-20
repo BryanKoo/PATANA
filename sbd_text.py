@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import os
 import pdb
 import sys
-sys.path.append("/home/khkoo/crawl/mt-crawlers")
-from utils.lang_util import has_hanja, has_hangul, has_alpha
+sys.path.append("/home/khkoo")
+from textutil.alphabet import has_hanja, has_hangul, has_alpha
 from utils.sentence_segmenter_en import sentence_segmenter
 from konlpy.tag import Mecab
 mecab = Mecab()
@@ -73,7 +73,7 @@ def remove_stopword(line):
 
 if __name__ == "__main__":
   if len(sys.argv) < 3:
-    print "run with 2 arguments for patent directory(searched_patents, timed_patents) and type of extraction(abstract, description, claims, sentences)"
+    print "run with 2 arguments for subdir (searched_patents, timed_patents) and section (abstract, description, claims, sentences)"
     sys.exit()
   filename = sys.argv[1] + "/" + sys.argv[2] + ".txt"
   #sbd_text(filename)
