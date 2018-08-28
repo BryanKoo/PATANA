@@ -13,7 +13,7 @@ def find_dependency(claim):
   else:
     return dependency_word_pos + 7
 
-# all, abstract, description(including abstract), claims
+# abstract, description, claims, sentences
 def get_texts(file_name, parts="all"):
   first_slash = file_name.find("/")
   num_start = file_name.rfind("/")
@@ -283,7 +283,7 @@ def get_texts(file_name, parts="all"):
 
 if __name__ == "__main__":
   if len(sys.argv) < 3:
-    print "run with 2 arguments for patent directory(searched_patents, timed_patents) and type of extraction(abstract, description, claims, sentences, all)"
+    print "run with 2 arguments for patent directory(searched_patents, timed_patents) and section(abstract, description, claims, sentences)"
     sys.exit()
   html_dir = sys.argv[1] + "/html/"
   files = os.listdir(html_dir)

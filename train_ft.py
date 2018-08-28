@@ -12,7 +12,7 @@ def train(corpus, model_file):
 
 if __name__ == "__main__":
   if len(sys.argv) < 3:
-    print "run with 2 arguments for patent directory(searched_patents, timed_patents) and type of extraction(abstract, description, claims, sentences)"
+    print "run with 2 arguments for patent directory(searched_patents, timed_patents) and section(abstract, description, claims, sentences)"
     sys.exit()
   corpus_file = sys.argv[1] + "/" + sys.argv[2] + "_sbd_words.txt"
   if not os.path.exists(corpus_file):

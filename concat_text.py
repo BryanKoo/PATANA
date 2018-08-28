@@ -19,7 +19,7 @@ def concat_texts(file_name, ex_type):
 
 if __name__ == "__main__":
   if len(sys.argv) < 3:
-    print "run with 2 arguments for patent directory(searched_patents, timed_patents) and type of extraction(abstract, description, claims, sentences)"
+    print "run with 2 arguments for patent directory(searched_patents, timed_patents) and section(abstract, description, claims, sentences)"
     sys.exit()
   text_dir = sys.argv[1] + "/" + sys.argv[2] + "/"
   files = os.listdir(text_dir)
